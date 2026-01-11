@@ -1,10 +1,16 @@
-import Image from "next/image";
+import Blogs from "./blog/page";
+import { About } from "./components/about/page";
+import LanguageSwitch from "./components/LanguageSwitch";
 import styles from "./style/page.module.css";
 
 export default function Home() {
   return (
     <div className={styles.page}>
-     <main>main</main>
+      <LanguageSwitch />
+     <main>
+      <Blogs />
+      <About />
+      </main>
     </div>
   );
 }
