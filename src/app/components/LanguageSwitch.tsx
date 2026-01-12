@@ -2,6 +2,8 @@
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
+import { splitEnPath, toEnPath } from "../../lib/langRouting";
+
 function setLangCookie(lang: "en" | "ja") {
   if (lang === "en") {
     // biome-ignore lint/suspicious/noDocumentCookie: PoCのため簡易にcookieへ保存（middlewareで参照）
@@ -34,11 +36,8 @@ export default function LanguageSwitch() {
     const sp = new URLSearchParams(searchParams.toString());
     sp.delete("lang");
 
-    const basePath = pathname.startsWith("/en")
-      ? pathname.replace(/^\/en/, "") || "/"
-      : pathname;
-
-    const targetPath = toEn ? `/en${basePath}` : basePath;
+    const { basePath } = splitEnPath(pathname);
+    const targetPath = toEn ? toEnPath(basePath) : basePath;
 
     const qs = sp.toString();
     return qs ? `${targetPath}?${qs}` : targetPath;
