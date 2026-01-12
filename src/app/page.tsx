@@ -1,5 +1,5 @@
+import Link from "next/link";
 import Blogs from "./blog/page";
-import { About } from "./components/about/page";
 import LanguageSwitch from "./components/LanguageSwitch";
 import styles from "./style/page.module.css";
 
@@ -7,9 +7,12 @@ export default function Home() {
   return (
     <div className={styles.page}>
       <LanguageSwitch />
-     <main>
-      <Blogs />
-      <About />
+      <main>
+        <div style={{ display: "flex", gap: 12 }}>
+          <Link href="/about">About</Link>
+          <Link href="/contact">Contact</Link>
+        </div>
+        <Blogs />
       </main>
     </div>
   );
